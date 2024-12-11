@@ -1,44 +1,40 @@
-from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QPushButton, QMessageBox
-from .payment_window import PaymentWindow  # Import the PaymentWindow class from payment_window.py
+from PyQt5.QtWidgets import QWidget, QLabel, QVBoxLayout
 
 class BookingWindow(QWidget):
     def __init__(self, brand, model, car_type, location, capacity):
+        """
+        Initialize the Booking Window with car details.
+        :param brand: Brand of the car.
+        :param model: Model of the car.
+        :param car_type: Type of the car (e.g., Sedan, SUV).
+        :param location: Location of the car.
+        :param capacity: Seating capacity of the car.
+        """
         super().__init__()
-        self.setWindowTitle("Booking Window")
+        self.brand = brand
+        self.model = model
+        self.car_type = car_type
+        self.location = location
+        self.capacity = capacity
 
+        self.init_ui()
+
+    def init_ui(self):
+        self.setWindowTitle("Booking Details")
+
+        # Labels for car details
+        brand_label = QLabel(f"Brand: {self.brand}")
+        model_label = QLabel(f"Model: {self.model}")
+        car_type_label = QLabel(f"Type: {self.car_type}")
+        location_label = QLabel(f"Location: {self.location}")
+        capacity_label = QLabel(f"Capacity: {self.capacity} seats")
+
+        # Arrange labels in a vertical layout
         layout = QVBoxLayout()
-        car_details_text = (f"Car Details:\n"
-                            f"Brand: {brand}\n"
-                            f"Model: {model}\n"
-                            f"Type: {car_type}\n"
-                            f"Location: {location}\n"
-                            f"Capacity: {capacity}")
-        
-        self.car_details_label = QLabel(car_details_text)
-        self.car_details_label.setWordWrap(True)
-        layout.addWidget(self.car_details_label)
-
-        self.book_button = QPushButton("Confirm Booking")
-        self.book_button.setStyleSheet("""
-            background-color: #3498db;
-            font-size: 14px;
-            color: white;
-            border-radius: 10px;
-            padding: 10px;
-        """)
-        layout.addWidget(self.book_button)
-
-        self.book_button.clicked.connect(self.confirm_booking)
+        layout.addWidget(brand_label)
+        layout.addWidget(model_label)
+        layout.addWidget(car_type_label)
+        layout.addWidget(location_label)
+        layout.addWidget(capacity_label)
 
         self.setLayout(layout)
-
-    def confirm_booking(self):
-        # Booking confirmation
-        QMessageBox.information(self, "Booking Confirmed", "Your booking has been confirmed. Please proceed with payment.")
-        
-        # Open Payment Window
-        self.payment_window = PaymentWindow()  # Open the PaymentWindow
-        self.payment_window.show()
-
-        # Close the booking window
-        self.close()
