@@ -3,6 +3,8 @@ from windows.login_window import LoginWindow
 from windows.signup_window import SignUpWindow
 from windows.home_window import HomeWindow
 from windows.logout_window import LogoutWindow
+from windows.booking_window import BookingWindow
+from windows.payment_window import PaymentWindow
 
 class MainWindow(QMainWindow):
     def __init__(self):
