@@ -1,6 +1,6 @@
-# windows/logout_window.py
-from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QPushButton
+from PyQt5.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QLabel, QPushButton, QLineEdit, QGridLayout
 from PyQt5.QtCore import Qt
+from PyQt5.QtGui import QIcon, QPixmap
 
 class LogoutWindow(QWidget):
     def __init__(self):
@@ -34,7 +34,6 @@ class LogoutWindow(QWidget):
             border-radius: 15px;
             padding: 10px;
         """)
-        layout.addWidget(self.logout_button)
 
         # Button to cancel logout
         self.cancel_button = QPushButton("Cancel")

@@ -1,6 +1,6 @@
-# windows/home_window.py
-from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QPushButton
+from PyQt5.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QLabel, QPushButton, QLineEdit, QGridLayout
 from PyQt5.QtCore import Qt
+from PyQt5.QtGui import QIcon, QPixmap
 
 class HomeWindow(QWidget):
     def __init__(self):
@@ -17,6 +17,18 @@ class HomeWindow(QWidget):
 
         # Layout
         layout = QVBoxLayout()
+
+        # Search Bar
+        self.search_bar = QLineEdit(self)
+        self.search_bar.setPlaceholderText("Search for cars, bookings, etc...")
+        self.search_button = QPushButton(QIcon("search_icon.png"), "Search")  # Use an icon for the search button
+        self.search_button.setStyleSheet("background-color: #3498db; color: white; padding: 10px; border-radius: 5px;")
+
+        search_layout = QHBoxLayout()
+        search_layout.addWidget(self.search_bar)
+        search_layout.addWidget(self.search_button)
+
+        layout.addLayout(search_layout)
 
         # Welcome label
         self.label = QLabel("Welcome to the Home Page!")

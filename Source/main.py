@@ -10,7 +10,7 @@ class MainWindow(QMainWindow):
         self.setWindowTitle("Main Window")
 
         # Customize window size
-        self.resize(400, 700)  # Set the window size to 800x600 
+        self.resize(400, 800)  # Set the window size to 400x800
 
         # Stacked widget to switch between windows
         self.stacked_widget = QStackedWidget()
