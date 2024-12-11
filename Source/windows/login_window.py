@@ -10,7 +10,7 @@ class LoginWindow(QWidget):
         layout = QVBoxLayout()
 
         # Add app name at the top with larger font
-        self.app_name_label = QLabel("CarGo")
+        self.app_name_label = QLabel("Zoom Mate")
         self.app_name_label.setStyleSheet("font-size: 60px; font-weight: bold; color: #3498db; padding-top: 80px;")
         self.app_name_label.setAlignment(Qt.AlignCenter)
         layout.addWidget(self.app_name_label)

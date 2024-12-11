@@ -3,8 +3,6 @@ from windows.login_window import LoginWindow
 from windows.signup_window import SignUpWindow
 from windows.home_window import HomeWindow
 from windows.logout_window import LogoutWindow
-from windows.booking_window import BookingWindow
-from windows.payment_window import PaymentWindow
 
 class MainWindow(QMainWindow):
     def __init__(self):
@@ -40,6 +38,7 @@ class MainWindow(QMainWindow):
         self.home_window.logout_button.clicked.connect(self.show_logout)
         self.logout_window.logout_button.clicked.connect(self.show_login)
         self.logout_window.cancel_button.clicked.connect(self.show_home)
+        self.signup_window.signup_button.clicked.connect(self.show_login)
 
     def show_home(self):
         """Switch to the home window."""

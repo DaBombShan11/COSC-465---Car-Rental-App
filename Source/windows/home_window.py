@@ -1,8 +1,9 @@
 from PyQt5.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QLabel, QPushButton, QLineEdit, QGridLayout, QListWidget, QMessageBox
 from PyQt5.QtCore import Qt
-from PyQt5.QtGui import QIcon, QPixmap
+from PyQt5.QtGui import QIcon
 from windows.support_window import SupportWindow  # Import SupportWindow
 from windows.booking_window import BookingWindow  # Import BookingWindow
+from windows.account_window import AccountDetailsWindow  # Import AccountDetailsWindow
 
 class HomeWindow(QWidget):
     def __init__(self):
@@ -94,6 +95,18 @@ class HomeWindow(QWidget):
         layout.addWidget(self.support_button)
         self.support_button.clicked.connect(self.open_support_window)
 
+        # Account Details button
+        self.account_details_button = QPushButton("Account Details")
+        self.account_details_button.setStyleSheet("""
+            background-color: #9b59b6;
+            font-size: 14px;
+            color: white;
+            border-radius: 10px;
+            padding: 10px;
+        """)
+        layout.addWidget(self.account_details_button)
+        self.account_details_button.clicked.connect(self.open_account_details_window)
+
         # Connect the result list item clicked to show the booking window
         self.results_list.itemClicked.connect(self.open_booking_window)
 
@@ -128,29 +141,25 @@ class HomeWindow(QWidget):
     def open_booking_window(self):
         selected_car = self.results_list.currentItem().text()
         details = selected_car.split(" - ")
-        print(details)
-        print(details[0].split(" ")[0])
-        # Initialize variables to store the extracted details
-        brand = model = car_type = location = capacity = None
+        brand = details[0].split(" ")[0]
+        model = details[0].split(" ")[1]
+        car_type = details[1]
+        location = details[2]
+        capacity = int(details[3].split("Capacity: ")[1])
 
-        # Loop through the details and extract information
-        for detail in details:
-            brand = details[0].split(" ")[0]
-            model = details[0].split(" ")[1]
-            car_type = details[1]
-            location = details[2]
-            if "Capacity:" in detail:
-                capacity = int(detail.split("Capacity: ")[1])
-
-        print(f"Booking for {brand} {model} - {car_type} - {location} - Capacity: {capacity}")
-
-        # Now pass the correct values to the booking window
         self.booking_window = BookingWindow(brand, model, car_type, location, capacity)
         self.booking_window.show()
-
-
-
 
     def open_support_window(self):
         self.support_window = SupportWindow()
         self.support_window.show()
+
+    def open_account_details_window(self):
+        self.account_details_window = AccountDetailsWindow(
+            name="John Doe",
+            email="johndoe@example.com",
+            phone="123-456-7890",
+            address="123 Main Street, City, Country",
+            last_booking="Toyota Corolla - New York"
+        )
+        self.account_details_window.show()
