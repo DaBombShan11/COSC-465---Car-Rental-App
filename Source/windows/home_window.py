@@ -17,6 +17,8 @@ class HomeWindow(QWidget):
         
         # Layout
         layout = QVBoxLayout()
+        layout.setSpacing(5)  # Set the spacing between widgets to 5px
+
 
         # Search Bar
         self.search_bar = QLineEdit(self)
